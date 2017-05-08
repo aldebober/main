@@ -33,3 +33,4 @@ function exec_all
         ssh -o 'StrictHostKeyChecking=no' -i .ssh/key.pem -l ec2-user $x "hostname; $argv"
     end
 end
+set -gx PATH ~/Library/Python/2.7/bin $PATH
