@@ -1,0 +1,21 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "AddCannedAcl",
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": [
+					"arn:aws:iam:::user/user1",
+					"arn:aws:iam:::user/user2"
+				]
+			},
+			"Action": [
+				"s3:PutObject",
+				"s3:GetObject",
+				"s3:ListMultipartUploadParts"
+			],
+			"Resource": "arn:aws:s3:::bucket_name/*"
+		}
+	]
+}
