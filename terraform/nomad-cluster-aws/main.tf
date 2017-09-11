@@ -11,8 +11,8 @@ terraform {
   backend "s3" { 
     region = "eu-central-1"
     encrypt = "true"
-    bucket = "simplinic-terraform-states"
-    key = "gloval.tfstate"
+    bucket = "your_bucket_name"
+    key = "global.tfstate"
   }
 }
 
