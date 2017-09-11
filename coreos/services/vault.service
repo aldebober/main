@@ -1,0 +1,18 @@
+[Unit]
+Description=Vault
+Requires=docker.service
+Requires=consul.service
+Requires=coreos-metadata.service
+After=coreos-metadata.service
+After=docker.service
+After=consul.service
+
+[Service]
+EnvironmentFile=/run/metadata/coreos
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill vault
+ExecStartPre=-/usr/bin/docker rm vault
+ExecStart=/usr/bin/docker run -d  --net=host -p 8200:8200 -p 8201:8201 -e 'VAULT_ADDR=${COREOS_EC2_IPV4_LOCAL}:8200' -e 'VAULT_ADVERTISE_ADDR=http://${COREOS_EC2_IPV4_LOCAL}:8200' -e 'VAULT_REDIRECT_ADDR=http://${COREOS_EC2_IPV4_LOCAL}:8200' --cap-add=IPC_LOCK -v /opt/vault:/vault -d --name=vault wdijkerman/vault
+
+[Install]
+WantedBy=multi-user.target

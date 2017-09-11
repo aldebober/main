@@ -1,0 +1,13 @@
+[Unit]
+Description=Hostname
+Requires=coreos-metadata.service
+After=coreos-metadata.service
+
+[Service]
+TimeoutStartSec=0
+EnvironmentFile=/run/metadata/coreos
+ExecStart=/usr/bin/hostname ${COREOS_EC2_HOSTNAME}
+ExecStartPost=/usr/bin/echo "${COREOS_EC2_HOSTNAME}" > /etc/hostname
+
+[Install]
+WantedBy=multi-user.target

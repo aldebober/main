@@ -1,0 +1,19 @@
+[Unit]
+Description=Nomad
+Requires=consul.service
+Requires=metadata.service
+Requires=coreos-metadata.service
+After=coreos-metadata.service
+After=metadata.service
+After=consul.service
+
+[Service]
+TimeoutStartSec=0
+EnvironmentFile=/run/metadata/coreos
+EnvironmentFile=/run/metadata/environment
+ExecStartPre=-/usr/bin/pkill nomad
+ExecStartPre=/usr/bin/hostname ${COREOS_EC2_HOSTNAME}
+ExecStart=/bin/sh -c "VAULT_TOKEN=$(/home/core/get_token.sh ${Env} ${COREOS_EC2_INSTANCE_ID}) && exec /home/core/nomad agent --vault-create-from-role=${Env}-nomad-cluster --vault-token=$VAULT_TOKEN --dc=${Env} --config=/opt/nomad/conf/base.hcl"
+
+[Install]
+WantedBy=multi-user.target

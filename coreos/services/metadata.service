@@ -1,0 +1,15 @@
+[Unit]
+Description=EC2 metadata agent
+Requires=docker.service
+Requires=coreos-metadata.service
+After=coreos-metadata.service
+After=docker.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=/run/metadata/coreos
+Environment=OUTPUT=/run/metadata/environment
+ExecStart=/usr/bin/bash -c 'echo "Env=$(/usr/bin/docker run -i ankitforcode/aws-cli-coreos aws --region=eu-central-1 --output=text ec2 describe-tags --filter \"Name=resource-id,Values=${COREOS_EC2_INSTANCE_ID}\" \"Name=key,Values=Env\" | /usr/bin/cut -f5)" > ${OUTPUT}'
+
+[Install]
+WantedBy=multi-user.target

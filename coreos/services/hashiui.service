@@ -1,0 +1,16 @@
+[Unit]
+Description=Hashiui
+Requires=docker.service
+Requires=coreos-metadata.service
+After=coreos-metadata.service
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill hashi-ui
+ExecStartPre=-/usr/bin/docker rm hashi-ui
+EnvironmentFile=/run/metadata/coreos
+ExecStart=/usr/bin/docker run -d --name hashi-ui -e NOMAD_ENABLE=1 -e NOMAD_ADDR=http://${COREOS_EC2_IPV4_LOCAL}:4646 -e CONSUL_ENABLE=1 -e CONSUL_ADDR=${COREOS_EC2_IPV4_LOCAL}:8500 -p 8000:3000 jippi/hashi-ui
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,22 @@
+[Unit]
+Description=Consul
+Requires=hostname.service
+Requires=docker.service
+Requires=metadata.service
+Requires=coreos-metadata.service
+After=metadata.service
+After=coreos-metadata.service
+After=docker.service
+After=hostname.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill consul-server
+ExecStartPre=-/usr/bin/docker rm consul-server
+EnvironmentFile=/run/metadata/coreos
+EnvironmentFile=/run/metadata/environment
+ExecStartPre=/usr/bin/hostname ${COREOS_EC2_HOSTNAME}
+ExecStart=/usr/bin/docker run -d --net=host --name consul-server -v /opt/consul/config:/consul/config -v /opt/consul/data:/consul/data -e 'CONSUL_ALLOW_PRIVILEGED_PORTS=' -e 'CONSUL_LOCAL_CONFIG={"client_addr": "0.0.0.0", "node_name": "${COREOS_EC2_HOSTNAME}", "retry_join_ec2": {"region": "eu-central-1", "tag_key": "Env", "tag_value": "${Env}"}}' consul agent -dns-port=54 -recursor=8.8.8.8 -datacenter=${Env} -bind=${COREOS_EC2_IPV4_LOCAL} -bootstrap-expect=3
+
+[Install]
+WantedBy=multi-user.target
