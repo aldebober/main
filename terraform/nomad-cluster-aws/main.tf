@@ -1,11 +1,3 @@
-/*
-Don't forget init with remoute state:
-terraform init -backend-config='key=default/global.tfstate' -backend-config=config.tfvars
-where key is path to environment's state, find out all keys:
-s3cmd ls s3://simplinic-terraform-states
-*/
-
-
 terraform {
   required_version = ">= 0.9.1"
   backend "s3" { 

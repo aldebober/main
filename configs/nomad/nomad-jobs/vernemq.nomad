@@ -27,7 +27,7 @@ job "vernemq" {
 #      }
 
       config {
-        image = "simplinictech/test:vernemq"
+        image = ""
         port_map {
           mqtt = 1883
 	  ws = 8888

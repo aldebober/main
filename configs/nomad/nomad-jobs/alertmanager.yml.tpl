@@ -1,11 +1,5 @@
 global:
   # The smarthost and SMTP sender used for mail notifications.
-  smtp_smarthost: 'smtp.gmail.com:465'
-  smtp_from: 'alertmanager@simplinic.com'
-  smtp_auth_username: ''
-  smtp_auth_password: ''
-  # The auth token for Hipchat.
-  hipchat_auth_token: '1234556789'
   # Alternative host for Hipchat.
   hipchat_url: 'https://hipchat.foobar.org/'
   slack_api_url: '{{ env "slack_url"}}'

@@ -8,7 +8,7 @@ job "telegraf" {
       driver = "raw_exec"
 
       artifact {
- 	source = "https://s3.eu-central-1.amazonaws.com/simplinic-configs/services/telegraf.conf.tpl"
+ 	source = "https://s3.eu-central-1.amazonaws.com/bucket-name/services/telegraf.conf.tpl"
 	destination = "local"
       }
 
