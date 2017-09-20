@@ -2,7 +2,6 @@ variable "instance_type" {}
 variable "aws_key_pair" {}
 variable "sec_primary_id" {}
 variable "aws_region" {}
-variable "iam_role_name" {}
 variable "name" {}
 variable "tags" { 
     description = "A list of tags to add to all resources"
@@ -24,7 +23,7 @@ data "aws_ami" "coreos_server_ami" {
 
 resource "aws_launch_configuration" "nomad" {
 	image_id = "${data.aws_ami.coreos_server_ami.id}"
-    iam_instance_profile = "${var.iam_role_name}"
+    iam_instance_profile = "${aws_iam_instance_profile.lb_management.id}"
     name_prefix   = "Nomad-${terraform.env}-"
 	instance_type = "${var.instance_type}"
 	associate_public_ip_address = true
@@ -68,6 +67,10 @@ resource "aws_autoscaling_group" "nomad" {
 
 output "lc_id" {
   value = "${aws_launch_configuration.nomad.id}"
+}
+
+output "iam_role_id" {
+  value = "${aws_iam_instance_profile.lb_management.id}"
 }
 
 output "autoscale_id" {

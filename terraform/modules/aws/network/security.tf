@@ -1,5 +1,5 @@
 resource "aws_security_group" "bastion" {
-  name        = "${var.name}"
+  name        = "Bastion-${terraform.env}"
   vpc_id      = "${aws_vpc.nomad.id}"
   description = "Bastion security group (only SSH inbound access is allowed)"
 
@@ -28,6 +28,16 @@ resource "aws_security_group_rule" "ssh_sg_ingress" {
   security_group_id        = "${aws_security_group.bastion.id}"
 }
 
+resource "aws_security_group_rule" "grafana_ingress" {
+  type              = "ingress"
+  from_port         = "3000"
+  to_port           = "3000"
+  protocol          = "tcp"
+  cidr_blocks       = "${var.allowed_cidr}"
+  ipv6_cidr_blocks  = "${var.allowed_ipv6_cidr}"
+  security_group_id = "${aws_security_group.bastion.id}"
+}
+
 resource "aws_security_group_rule" "bastion_all_egress" {
   type              = "egress"
   from_port         = "0"
@@ -39,7 +49,7 @@ resource "aws_security_group_rule" "bastion_all_egress" {
 }
 
 resource "aws_security_group" "primary" {
-  name   = "nomad_group"
+  name   = "nomad_group-${terraform.env}"
   vpc_id = "${aws_vpc.nomad.id}"
 
   ingress {
@@ -47,6 +57,13 @@ resource "aws_security_group" "primary" {
     to_port   = 0
     protocol  = "-1"
     self      = true
+  }
+
+  ingress {
+    from_port   = 8883
+    to_port     = 8883
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -69,7 +86,7 @@ resource "aws_security_group_rule" "8000_bastion" {
   security_group_id = "${aws_security_group.primary.id}"
 }
 
-resource "aws_security_group_rule" "22_primary" {
+resource "aws_security_group_rule" "22_bastion" {
   depends_on    = [ "aws_security_group.bastion", "aws_security_group.primary" ]
   type            = "ingress"
   from_port       = 22
