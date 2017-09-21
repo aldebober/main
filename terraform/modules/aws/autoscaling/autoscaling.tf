@@ -16,9 +16,9 @@ data "aws_ami" "coreos_server_ami" {
   	}
   	filter {
     	name   = "name"
-    	values = ["simplinic-coreos*"]
+    	values = ["coreos*"]
   	}
-  	owners = ["528733774338"]
+  	owners = [""]
 }
 
 resource "aws_launch_configuration" "nomad" {
