@@ -82,10 +82,13 @@ def get_vpc_info(vpcid):
 
 
 def AccepterVpcInfo(vpcid):
-    response = client.describe_vpc_peering_connections(VpcPeeringConnectionIds=[vpcid])
-    if response:
-        vpc_id = [x['AccepterVpcInfo']['VpcId'] for x in response['VpcPeeringConnections'] ]
-    return vpc_id
+    try:
+        response = client.describe_vpc_peering_connections(VpcPeeringConnectionIds=[vpcid])
+        if response:
+            vpc_id = [x['AccepterVpcInfo']['VpcId'] for x in response['VpcPeeringConnections'] ]
+        return vpc_id
+    except:
+        return 'None'
 
 
 def nat_gateways_info(nat_id):
@@ -131,7 +134,10 @@ client = boto3.client('ec2', region_name=region)
 
 routes = get_route_list()
 for vpc,routes in routes.items():
-    vpc_name, vpc_cidr, all_subnets = get_vpc_info(vpc)
+    if vpc:
+        vpc_name, vpc_cidr, all_subnets = get_vpc_info(vpc)
+    else:
+        continue
     explicit_subnet = []
     implicit_subnet = []
     print "-------------------------------------\n\n"
@@ -148,9 +154,10 @@ for vpc,routes in routes.items():
                     destination = table['DestinationPrefixListId']
                 elif 'VpcPeeringConnectionId' in table:
                     vpcs_id = AccepterVpcInfo(table['VpcPeeringConnectionId'])
-                    vpc_name, vpc_cidr, _ = get_vpc_info(vpcs_id[0])
-                    target = table['VpcPeeringConnectionId'] + " <=> " + ' '.join(vpcs_id) + ' ' + vpc_name + '(' + vpc_cidr + ')'
-                    destination = table['DestinationCidrBlock']
+                    if len(vpcs_id[0]) > 10:
+                        vpc_name, vpc_cidr, _ = get_vpc_info(vpcs_id[0])
+                        target = table['VpcPeeringConnectionId'] + " <=> " + ' '.join(vpcs_id) + ' ' + vpc_name + '(' + vpc_cidr + ')'
+                        destination = table['DestinationCidrBlock']
                 elif 'NatGatewayId' in table:
                     private_ip, public_ip = nat_gateways_info(table['NatGatewayId'])
                     target = table['NatGatewayId'] + '\tIPs: ' + public_ip + '(' + private_ip + ')'
