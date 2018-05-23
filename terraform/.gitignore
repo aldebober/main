@@ -1,0 +1,8 @@
+/main.tf
+/terraform.tfvars
+/terraform.tfstate.*.backup
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+errored.tfstate
+*.zip
