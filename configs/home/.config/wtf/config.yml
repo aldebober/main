@@ -1,0 +1,177 @@
+wtf:
+  colors:
+    border:
+      focusable: darkslateblue
+      focused: orange
+      normal: gray
+  grid:
+    columns: [32, 32, 32, 32, 90]
+    rows: [10, 10, 10, 4, 4, 90]
+  refreshInterval: 1
+  mods:
+    clocks_a:
+      colors:
+        rows:
+          even: "lightblue"
+          odd: "white"
+      enabled: true
+      locations:
+        Tallinn: "Europe/Tallinn"
+        Toronto: "America/Toronto"
+        Paris: "Europe/Paris"
+        Barcelona: "Europe/Madrid"
+        London: "Europe/London"
+      position:
+        top: 0
+        left: 4
+        height: 1
+        width: 1
+      refreshInterval: 15
+      sort: "alphabetical"
+      title: "Clocks A"
+      type: "clocks"
+    ipinfo:
+      colors:
+        name: "lightblue"
+        value: "white"
+      enabled: true
+      position:
+        top: 1
+        left: 4
+        height: 1
+        width: 1
+      refreshInterval: 150
+    prettyweather:
+      enabled: true
+      city: "tallinn"
+      position:
+        top: 2
+        left: 4
+        height: 1
+        width: 1
+      refreshInterval: 300
+      unit: "m"
+      view: 0
+      language: "en"
+    textfile:
+      enabled: false
+      filePath: "~/.config/wtf/config.yml"
+      format: true
+      position:
+        top: 0
+        left: 0
+        height: 4
+        width: 1
+      refreshInterval: 30
+      wrapText: false
+    gcal:
+      colors:
+        title: "red"
+        eventTime: "lightblue"
+        description: "yellow"
+        highlights:
+        - ['1on1|1\/11', 'green']
+        - ['apple|google|aws', 'blue']
+        - ['interview|meet', 'magenta']
+        - ['lunch', 'yellow']
+        past: "gray"
+      calendarReadLevel: "reader"
+      conflictIcon: "🚨"
+      currentIcon: "💥"
+      displayResponseStatus: true
+      email: "yurix@rcanebet.com"
+      enabled: true
+      eventCount: 15
+      hourFormat: "12"
+      multiCalendar: true
+      position:
+        top: 0
+        left: 0
+        height: 5
+        width: 1
+      refreshInterval: 300
+      secretFile: "~/.config/wtf/client_secret.json"
+      showDeclined: true
+      timezone: "Europe/Tallinn"
+      withLocation: true
+    jira:
+      apiKey: ""
+      colors:
+        rows:
+          even: "lightblue"
+          odd: "white"
+      domain: "https://ezygaming.atlassian.net"
+      email: "yurix@change.me"
+      enabled: true
+      #jql: "status="
+      position:
+        top: 0
+        left: 1
+        height: 1
+        width: 3
+      project: "Infra"
+      refreshInterval: 900
+      username: "yurix"
+      verifyServerCertificate: true
+    cmdrunner:
+      cmd: "wercker_runs.py"
+      title: "Wercker runs"
+      enabled: true
+      tail: true
+      position:
+        top: 1
+        left: 1
+        height: 3
+        width: 3
+      refreshInterval: 60
+    github:
+      apiKey: ""
+      baseURL: "https://api.github.com"
+      customQueries:
+        othersPRs:
+          title: "Others Pull Requests"
+          filter: "is:open is:pr"
+      enabled: true
+      enableStatus: true
+      position:
+        top: 4
+        left: 1
+        height: 2
+        width: 3
+      refreshInterval: 300
+      repositories:
+        - "main/infrastructure"
+      uploadURL: ""
+      username: ""
+    cryptolive:
+      enabled: true
+      position:
+        top: 5
+        left: 0
+        height: 1
+        width: 1
+      updateInterval: 15
+      currencies:
+        BTC:
+          displayName: Bitcoin
+          to:
+            - USD
+            - EUR
+            - ETH
+            - LTC
+            - DOGE
+      colors:
+        from:
+          name: coral
+          displayName: grey
+        to:
+          name: white
+          price: green
+        top:
+          from:
+            name: grey
+            displayName: coral
+          to:
+            name: red
+            field: white
+            value: green

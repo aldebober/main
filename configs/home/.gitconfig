@@ -1,0 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Yuriy
+	email = yurix@replace.me
+
+[alias]
+    p = !git push origin $(git rev-parse --abbrev-ref HEAD)
+    co = !git checkout
+    b = !git branch
+    c = "!git add -A && git commit -m "
+    s = !git status
+    rev = "!git checkout HEAD -- "

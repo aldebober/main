@@ -1,0 +1,28 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+# End of lines configured by zsh-newuser-install
+plugins=(git colored-man colorize pip python brew osx zsh-syntax-highlighting zsh-autosuggestions ansible aws cp iterm2 screen terraform tmux )
+
+ZSH_THEME=pygmalion
+
+source ~/env.sh
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
+
+fpath=(/usr/local/share/zsh-completions $fpath)
