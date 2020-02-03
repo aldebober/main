@@ -1,0 +1,84 @@
+---
+description: "Restore depersonalised dumb"
+schemaVersion: "0.3"
+assumeRole: ${serviceRoleArn}
+parameters:
+  FakeParam:
+    type: String
+    description: "Fake"
+    default: Fake
+mainSteps:
+- name: "launchInstance"
+  maxAttempts: 3
+  inputs:
+    IamInstanceProfileName: "${instance_profile}"
+    MaxInstanceCount: 1
+    UserData: "IyEvYmluL2Jhc2gNCg0KZnVuY3Rpb24gZ2V0X2NvbnRlbnRzKCkgew0KICAgIGlmIFsgLXggIiQod2hpY2ggY3VybCkiIF07IHRoZW4NCiAgICAgICAgY3VybCAtcyAtZiAiJDEiDQogICAgZWxpZiBbIC14ICIkKHdoaWNoIHdnZXQpIiBdOyB0aGVuDQogICAgICAgIHdnZXQgIiQxIiAtTyAtDQogICAgZWxzZQ0KICAgICAgICBkaWUgIk5vIGRvd25sb2FkIHV0aWxpdHkgKGN1cmwsIHdnZXQpIg0KICAgIGZpDQp9DQoNCnJlYWRvbmx5IElERU5USVRZX1VSTD0iaHR0cDovLzE2OS4yNTQuMTY5LjI1NC8yMDE2LTA2LTMwL2R5bmFtaWMvaW5zdGFuY2UtaWRlbnRpdHkvZG9jdW1lbnQvIg0KcmVhZG9ubHkgVFJVRV9SRUdJT049JChnZXRfY29udGVudHMgIiRJREVOVElUWV9VUkwiIHwgYXdrIC1GXCIgJy9yZWdpb24vIHsgcHJpbnQgJDQgfScpDQpyZWFkb25seSBERUZBVUxUX1JFR0lPTj0idXMtZWFzdC0xIg0KcmVhZG9ubHkgUkVHSU9OPSIke1RSVUVfUkVHSU9OOi0kREVGQVVMVF9SRUdJT059Ig0KDQpyZWFkb25seSBTQ1JJUFRfTkFNRT0iYXdzLWluc3RhbGwtc3NtLWFnZW50Ig0KIFNDUklQVF9VUkw9Imh0dHBzOi8vYXdzLXNzbS1kb3dubG9hZHMtJFJFR0lPTi5zMy5hbWF6b25hd3MuY29tL3NjcmlwdHMvJFNDUklQVF9OQU1FIg0KDQppZiBbICIkUkVHSU9OIiA9ICJjbi1ub3J0aC0xIiBdOyB0aGVuDQogIFNDUklQVF9VUkw9Imh0dHBzOi8vYXdzLXNzbS1kb3dubG9hZHMtJFJFR0lPTi5zMy5jbi1ub3J0aC0xLmFtYXpvbmF3cy5jb20uY24vc2NyaXB0cy8kU0NSSVBUX05BTUUiDQpmaQ0KDQppZiBbICIkUkVHSU9OIiA9ICJ1cy1nb3Ytd2VzdC0xIiBdOyB0aGVuDQogIFNDUklQVF9VUkw9Imh0dHBzOi8vYXdzLXNzbS1kb3dubG9hZHMtJFJFR0lPTi5zMy11cy1nb3Ytd2VzdC0xLmFtYXpvbmF3cy5jb20vc2NyaXB0cy8kU0NSSVBUX05BTUUiDQpmaQ0KDQpjZCAvdG1wDQpGSUxFX1NJWkU9MA0KTUFYX1JFVFJZX0NPVU5UPTMNClJFVFJZX0NPVU5UPTANCg0Kd2hpbGUgWyAkUkVUUllfQ09VTlQgLWx0ICRNQVhfUkVUUllfQ09VTlQgXSA7IGRvDQogIGVjaG8gQVdTLVVwZGF0ZUxpbnV4QW1pOiBEb3dubG9hZGluZyBzY3JpcHQgZnJvbSAkU0NSSVBUX1VSTA0KICBnZXRfY29udGVudHMgIiRTQ1JJUFRfVVJMIiA+ICIkU0NSSVBUX05BTUUiDQogIEZJTEVfU0laRT0kKGR1IC1rIC90bXAvJFNDUklQVF9OQU1FIHwgY3V0IC1mMSkNCiAgZWNobyBBV1MtVXBkYXRlTGludXhBbWk6IEZpbmlzaGVkIGRvd25sb2FkaW5nIHNjcmlwdCwgc2l6ZTogJEZJTEVfU0laRQ0KICBpZiBbICRGSUxFX1NJWkUgLWd0IDAgXTsgdGhlbg0KICAgIGJyZWFrDQogIGVsc2UNCiAgICBpZiBbWyAkUkVUUllfQ09VTlQgLWx0IE1BWF9SRVRSWV9DT1VOVCBdXTsgdGhlbg0KICAgICAgUkVUUllfQ09VTlQ9JCgoUkVUUllfQ09VTlQrMSkpOw0KICAgICAgZWNobyBBV1MtVXBkYXRlTGludXhBbWk6IEZpbGVTaXplIGlzIDAsIHJldHJ5Q291bnQ6ICRSRVRSWV9DT1VOVA0KICAgIGZpDQogIGZpIA0KZG9uZQ0KDQppZiBbICRGSUxFX1NJWkUgLWd0IDAgXTsgdGhlbg0KICBjaG1vZCAreCAiJFNDUklQVF9OQU1FIg0KICBlY2hvIEFXUy1VcGRhdGVMaW51eEFtaTogUnVubmluZyBVcGRhdGVTU01BZ2VudCBzY3JpcHQgbm93IC4uLi4NCiAgLi8iJFNDUklQVF9OQU1FIiAtLXJlZ2lvbiAiJFJFR0lPTiINCmVsc2UNCiAgZWNobyBBV1MtVXBkYXRlTGludXhBbWk6IFVuYWJsZSB0byBkb3dubG9hZCBzY3JpcHQsIHF1aXR0aW5nIC4uLi4NCmZp"
+    # Amazon Linux 2 AMI (HVM)
+    ImageId: "ami-0ce71448843cb18a1"
+    BlockDeviceMappings:
+    - Ebs:
+        VolumeType: "gp2"
+        VolumeSize: 100
+        DeleteOnTermination: true
+      DeviceName: "/dev/xvda"
+    SubnetId: "subnet-0eb41f8c66a02f49f"
+    InstanceType: "t2.small"
+    MinInstanceCount: 1
+  action: "aws:runInstances"
+  timeoutSeconds: 1200
+  onFailure: "step:terminateInstance"
+- name: "downloadAndDepersonaliseDatabaseDump"
+  maxAttempts: 3
+  inputs:
+    Parameters:
+      commands:
+      - |
+        #!/bin/bash
+        set -e
+
+        # Vars
+        dumpDb=prod-dumb.eu-west-1.rds.amazonaws.com
+        dumpDbPw=${dumpDbPw}
+        dumpDbOwnerPw=${dumpDbOwnerPw}
+
+        # Pre-requisites
+        export AWS_DEFAULT_REGION=eu-west-1
+        amazon-linux-extras install -y postgresql10
+
+        # Database restore
+        ## Tell anyone using the dump db that it's time to get out
+        PGPASSWORD=$dumpDbPw psql -h $dumpDb -U postgres -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'backend' AND pid <> pg_backend_pid();";
+
+        ## Prepare dump db
+        PGPASSWORD=$dumpDbPw psql -h $dumpDb -U postgres -c "DROP DATABASE IF EXISTS backend;"
+        PGPASSWORD=$dumpDbPw psql -h $dumpDb -U postgres -c "REASSIGN OWNED BY backend TO postgres; DROP OWNED BY backend;"
+        PGPASSWORD=$dumpDbPw psql -h $dumpDb -U postgres -c "DROP ROLE IF EXISTS backend;"
+        PGPASSWORD=$dumpDbPw psql -h $dumpDb -U postgres -c "CREATE ROLE backend WITH LOGIN CREATEDB ENCRYPTED PASSWORD '${dumpDbOwnerPw}';"
+        PGPASSWORD=$dumpDbPw psql -h $dumpDb -U postgres -c "GRANT backend TO postgres;"
+        PGPASSWORD=$dumpDbPw psql -h $dumpDb -U postgres -c "CREATE EXTENSION IF NOT EXISTS plpgsql;"
+        PGPASSWORD=$dumpDbPw psql -h $dumpDb -U postgres -c "CREATE DATABASE backend OWNER backend;"
+        PGPASSWORD=$dumpDbPw psql -h $dumpDb -U postgres -d backend -c "CREATE SCHEMA IF NOT EXISTS public;"
+        PGPASSWORD=$dumpDbPw psql -h $dumpDb -U postgres -d backend -c "ALTER SCHEMA public OWNER TO backend;"
+
+        ## Copy dump from s3
+        aws s3 cp s3://bucket/depersonalized_dump.bac depersonalized_dump.bac
+
+        ## Restore dump
+        PGPASSWORD=$dumpDbOwnerPw pg_restore -Fc -h $dumpDb -U backend -n public -d backend depersonalized_dump.bac
+
+    InstanceIds:
+    - "{{launchInstance.InstanceIds}}"
+    DocumentName: "AWS-RunShellScript"
+  action: "aws:runCommand"
+  timeoutSeconds: 3600
+  onFailure: "step:terminateInstance"
+- name: "terminateInstance"
+  maxAttempts: 3
+  inputs:
+    DesiredState: "terminated"
+    InstanceIds:
+    - "{{launchInstance.InstanceIds}}"
+  action: "aws:changeInstanceState"
+  onFailure: "Continue"
+
