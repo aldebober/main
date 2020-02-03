@@ -3,11 +3,11 @@
 Parsing wercker runs:
 [
   {
-    "id": "5e14bfc47b63df001ac522d3",
-    "url": "https://app.wercker.com/api/v3/runs/5e14bfc47b63df001ac522d3",
+    "id": "",
+    "url": "https://app.wercker.com/api/v3/runs/..",
     "branch": "develop",
     "tag": "",
-    "commitHash": "6424d5a9aca4b0428acf5a9134c78838c1dc67c3",
+    "commitHash": "",
     "createdAt": "2020-01-07T17:28:36.817Z",
     "finishedAt": "2020-01-07T17:36:37.147Z",
     "message": "Merge pull request #935 from arcanebet/BJ-163-favicon-fix-nested-urls\n\n[BJ-163]-favicon-fixed",
@@ -28,8 +28,8 @@ Parsing wercker runs:
       "type": "wercker"
     },
     "pipeline": {
-      "id": "5b361aa40c158e0100554236",
-      "url": "https://app.wercker.com/api/v3/pipelines/5b361aa40c158e0100554236",
+      "id": "",
+      "url": "https://app.wercker.com/api/v3/pipelines/..",
       "createdAt": "2018-06-29T11:40:20.776Z",
       "name": "store-staging",
       "permissions": "read",
@@ -44,12 +44,12 @@ Parsing wercker runs:
 import requests
 from termcolor import colored
 
-auth_token = '71dcfba6ccab45fbffc3650768ac9c5ef364f5f465209706c2ef6895b996744a'
+auth_token = ''
 bearer_token = 'Bearer ' +  auth_token
 header = {'Authorization': bearer_token}
 url = 'https://app.wercker.com/api/v3/runs'
-frontend_id = '5b2a23ff4f14b001009ff2dc'
-backend_id = '5b1f76c3bdf8750100221315'
+frontend_id = ''
+backend_id = ''
 
 
 def get_runs(app_id):
