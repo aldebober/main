@@ -1,0 +1,29 @@
+[global_tags]
+{% if telegraf_tags is defined and telegraf_tags != None %}
+{% for key, value in telegraf_tags.items()%}
+  {{ key }} = "{{ value }}"
+{% endfor %}
+{% endif %}
+{% if telegraf_aws_tags == true and ec2_tags is defined and ec2_tags != None %}
+{% for key, value in ec2_tags.tags.items()%}
+   {{ telegraf_aws_tags_prefix }}{{ key }} = "{{ value }}"
+{% endfor %}
+{% endif %}
+[agent]
+  interval = "{{ telegraf_agent_interval }}"
+  round_interval = {{ telegraf_round_interval }}
+  metric_batch_size = {{ telegraf_metric_batch_size }}
+  metric_buffer_limit = {{ telegraf_metric_buffer_limit }}
+  collection_jitter = "{{ telegraf_collection_jitter }}"
+  flush_interval = "{{ telegraf_flush_interval }}"
+  flush_jitter = "{{ telegraf_flush_jitter }}"
+  precision = ""
+  debug = {{ telegraf_debug }}
+  quiet = {{ telegraf_quiet }}
+  logfile = ""
+{% if telegraf_hostname is defined and telegraf_hostname != None %}
+  hostname = "{{ telegraf_hostname }}"
+{% else %}
+  hostname = "{{ ansible_hostname }}"
+{% endif %}
+  omit_hostname = {{ telegraf_omit_hostname }}

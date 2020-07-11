@@ -1,0 +1,33 @@
+---
+# Channel of Telegraf to install
+telegraf_install_version: stable
+
+telegraf_aws_tags: false
+telegraf_aws_tags_prefix:
+
+telegraf_agent_interval: 10s
+telegraf_round_interval: "true"
+telegraf_metric_batch_size: "50"
+telegraf_metric_buffer_limit: "500"
+
+telegraf_collection_jitter: 0s
+telegraf_flush_interval: 10s
+telegraf_flush_jitter: 0s
+telegraf_debug: "false"
+telegraf_quiet: "false"
+telegraf_hostname:
+telegraf_omit_hostname: "false"
+telegraf_install_url:
+
+telegraf_tags:
+  location: "region"
+  environment: "shared-resources"
+  version: "NA"
+  swe: "NA"
+  hwe: "NA"
+  aws_zone: "undefined"
+  instance_type: "undefined"
+
+filebeat_stat_url: "http://localhost:5066/stats"
+influxdb_url: "http://influxbd.host:8086"
+influxdb_db: "elk-stats"

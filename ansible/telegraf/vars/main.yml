@@ -1,0 +1,11 @@
+---
+# vars file for telegraf
+telegraf_start_service: yes
+telegraf_start_delay: 6
+
+# If yes, will overwrite the packaged configuration with an Asnible/jinja2 template
+telegraf_template_configuration: yes
+
+# Path for finding Telegraf data. Added for backwards-compatibility.
+telegraf_binary_path: /usr/bin/telegraf
+telegraf_configuration_dir: /etc/telegraf

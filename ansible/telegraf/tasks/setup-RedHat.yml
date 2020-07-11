@@ -1,0 +1,36 @@
+---
+- name: Add glip repository.
+  template:
+    src: 'telegraf.repo.j2'
+    dest: '/etc/yum.repos.d/telegraf.repo'
+    mode: '0644'
+
+- name: 'Install Telegraf packages [RHEL/CentOS]'
+  yum:
+    name:
+      - telegraf-rc
+      - python2-pip
+    state: latest
+    update_cache: yes
+  when: telegraf_install_url is not defined or telegraf_install_url == None
+
+- name: 'Install Telegraf from URL [RHEL/CentOS]'
+  yum:
+    name: "{{ telegraf_install_url }}"
+    state: present
+  when: telegraf_install_url is defined and telegraf_install_url != None
+
+- name: 'Install pip modules'
+  pip:
+    name:
+      - boto3
+
+- name: Add init file
+  template:
+    src: 'telegraf.service.j2'
+    dest: '/usr/lib/systemd/system/telegraf.service'
+    mode: '0644'
+
+- name: Reload systemd configuration [systemd]
+  systemd:
+    daemon_reload: yes

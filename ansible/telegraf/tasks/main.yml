@@ -1,0 +1,15 @@
+---
+# tasks file for telegraf
+- include: setup-RedHat.yml
+  when: ansible_os_family == "RedHat"
+  tags: [telegraf, install]
+
+- include: configure.yml
+  tags: [telegraf, configure]
+
+- name: Ensure Telegraf is started and enabled at boot.
+  service:
+    name: telegraf
+    state: started
+    enabled: true
+  tags: [telegraf, start]

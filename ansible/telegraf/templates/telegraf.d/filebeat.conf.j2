@@ -1,0 +1,13 @@
+[[outputs.influxdb]]
+  urls = ["{{ influxdb_url }}"]
+  database = "{{ influxdb_db }}"
+  retention_policy = ""
+  write_consistency = "any"
+  timeout = "5s"
+[[inputs.http]]
+  urls = [
+    "{{ filebeat_stat_url }}"
+  ]
+  name_override = "exec_filebeat"
+  data_format = "json"
+  interval = 60
